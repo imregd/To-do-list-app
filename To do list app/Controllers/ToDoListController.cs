@@ -25,6 +25,16 @@ namespace to_do_list_app.Controllers
             ToDoItems.Add(item);
             return RedirectToAction("Index");
         }
-        
+
+        public IActionResult Delete(Guid Id)
+        {
+            var item = ToDoItems.FirstOrDefault(x => x.Id == Id);
+            if (item != null)
+            {
+                ToDoItems.Remove(item);
+            }
+            return RedirectToAction("Index");
+        }
+
     }
 }

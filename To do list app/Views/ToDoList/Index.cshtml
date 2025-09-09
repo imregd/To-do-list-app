@@ -11,6 +11,7 @@
     {
         <table class="table">
             <thead class="theme-dark">
+         
                 <tr>
                     <th scope="col">Title</th>
                     <th scope="col">Start Date</th>
@@ -22,14 +23,22 @@
                 @{
                     foreach (ToDoListModel todoTask in Model)
                     {
-                        <tr>
+                        var rowColor = todoTask.Priority switch
+                        {
+                            3 => "#f8d7da", // red
+                            2 => "#fff3cd", // yellow
+                            _ => "#d1e7dd"  // green
+                        };
+
+
+                        <tr style="background-color: @rowColor">
                             <td>@todoTask.Title</td>
                             <td>@todoTask.StartDate</td>
                             <td>@todoTask.EndDate</td>
                             <td><button>View</button></td>
                             <td>
                                 <input type="button" value="Create" onclick="location.href='@Url.Action("Create", "ToDoList")'" />
-                                <input type="button" value="Delete" onclick="location.href='@Url.Action("Delete", "ToDoList")'" />
+                                <input type="button" value="Delete" onclick="location.href='@Url.Action("Delete", "ToDoList", new {Id = todoTask.Id} )'" />
                             </td>
 
                         </tr>
