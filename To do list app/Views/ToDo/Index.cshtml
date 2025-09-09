@@ -1,0 +1,43 @@
+﻿@model List<ToDoListModel>
+
+@{
+    if (Model.Count() < 0)
+    {
+        <div class=" = " alert alert-warning" role="alert">
+            There are no tasks to view
+        </div>
+    }
+    else
+    {
+        <table class="table">
+            <thead class="theme-dark">
+                <tr>
+                    <th scope="col">Title</th>
+                    <th scope="col">Start Date</th>
+                    <th scope="col">End Date</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (ToDoListModel todoTask in Model)
+                    {
+                        <tr>
+                            <td>@todoTask.Title</td>
+                            <td>@todoTask.StartDate</td>
+                            <td>@todoTask.EndDate</td>
+                            <td><button>View</button></td>
+                            <td>
+                                <input type="button" value="Create" onclick="location.href='@Url.Action("Create", "ToDoList")'" />
+                                <input type="button" value="Delete" onclick="location.href='@Url.Action("Delete", "ToDoList")'" />
+                            </td>
+
+                        </tr>
+                    }
+                }
+
+            </tbody>
+
+        </table>
+    }
+}
